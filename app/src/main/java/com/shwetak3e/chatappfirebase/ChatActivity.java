@@ -143,14 +143,16 @@ public class ChatActivity extends AppCompatActivity {
         //TextView textView = new TextView(ChatActivity.this);
 
         String sampleImageMessage = "";
-
-        if(message.contains("Hi") || message.contains("hi")){
-            sampleImageMessage = "1";
+        try {
+                if (message.contains("Hi") || message.contains("hi")) {
+                    sampleImageMessage = "1";
+                } else {
+                sampleImageMessage = null;
+            }
+        }catch (Exception e)
+        {
+            e.getMessage();
         }
-        else {
-            sampleImageMessage =null;
-        }
-
         //Here you pass activity, message(string) and image path or any other image identifier string(string)
         CustomChatView chat = new CustomChatView(ChatActivity.this, message,sampleImageMessage);
 

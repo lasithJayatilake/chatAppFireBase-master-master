@@ -41,17 +41,20 @@ public class CustomChatView extends LinearLayout {
 
 
         //if the image is not null you can show image by loading an existing image by identifying the value u got
-        if(imageMessage != null){
-            //if not null show an image
-            if(imageMessage == "1"){
-                mImage.setImageResource(R.drawable.hello);
+        try {
+            if (imageMessage != null) {
+                //if not null show an image
+                if (imageMessage == "1") {
+                    mImage.setImageResource(R.drawable.hello);
+                }
+            } else {
+                //if its null hide it
+                mImage.setVisibility(GONE);
             }
+        }catch (Exception e)
+        {
+            e.getMessage();
         }
-        else{
-            //if its null hide it
-            mImage.setVisibility(GONE);
-        }
-
     }
 
 }
