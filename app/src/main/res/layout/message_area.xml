@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <EditText
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="#CFD8DC"
+        android:textColor="#CFD8DC"
+        android:hint="Write a message..."
+        android:id="@+id/messageArea"
+        android:maxHeight="80dp"
+        />
+
+    <ImageView
+        android:id="@+id/micButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
+    <ImageView
+        android:id="@+id/signButton"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/hand_sign" />
+
+    <ImageView
+        android:id="@+id/sendButton"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:padding="4dp"
+        android:src="@android:drawable/ic_menu_send"
+        android:layout_weight="0.09" />
+</LinearLayout>
