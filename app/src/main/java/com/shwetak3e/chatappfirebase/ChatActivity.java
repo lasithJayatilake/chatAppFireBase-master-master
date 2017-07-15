@@ -144,7 +144,7 @@ public class ChatActivity extends AppCompatActivity {
 
         String sampleImageMessage = "";
 
-        if(message.contains("Hi")){
+        if(message.contains("Hi") || message.contains("hi")){
             sampleImageMessage = "1";
         }
         else {
