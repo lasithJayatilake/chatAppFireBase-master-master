@@ -53,6 +53,38 @@ public class CustomChatView extends LinearLayout {
                 {
                     Glide.with(CustomChatView.this).load(R.drawable.how_are_you).into(mImage);
                 }
+                if(imageMessage == "3")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.birthday).into(mImage);
+                }
+                if(imageMessage == "4")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.morning).into(mImage);
+                }
+                if(imageMessage == "5")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.afternoon).into(mImage);
+                }
+                if(imageMessage == "6")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.evening).into(mImage);
+                }
+                if(imageMessage == "7")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.night).into(mImage);
+                }
+                if (imageMessage == "8")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.breakfast).into(mImage);
+                }
+                if(imageMessage == "9")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.lunch).into(mImage);
+                }
+                if(imageMessage == "10")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.dinner).into(mImage);
+                }
             } else {
                 //if its null hide it
                 mImage.setVisibility(GONE);

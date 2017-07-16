@@ -181,6 +181,38 @@ public class ChatActivity extends AppCompatActivity {
                 {
                     sampleImageMessage = "2";
                 }
+                else if(message.contains("birthday") || message.contains("Birthday"))
+                {
+                    sampleImageMessage = "3";
+                }
+                else if(message.contains("morning") || message.contains("Morning"))
+                {
+                    sampleImageMessage = "4";
+                }
+                else if(message.contains("afternoon") || message.contains("Afternoon"))
+                {
+                    sampleImageMessage = "5";
+                }
+                else if(message.contains("evening") || message.contains("Evening"))
+                {
+                    sampleImageMessage = "6";
+                }
+                else if(message.contains("night") || message.contains("Night"))
+                {
+                    sampleImageMessage = "7";
+                }
+                else if(message.contains("breakfast") || message.contains("Breakfast"))
+                {
+                    sampleImageMessage = "8";
+                }
+                else if(message.contains("lunch") || message.contains("Lunch"))
+                {
+                    sampleImageMessage = "9";
+                }
+                else if(message.contains("dinner") || message.contains("Dinner"))
+                {
+                    sampleImageMessage = "10";
+                }
                 else {
                 sampleImageMessage = null;
             }
