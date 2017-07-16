@@ -9,7 +9,7 @@
     android:weightSum="1">
 
     <EditText
-        android:layout_width="258dp"
+        android:layout_width="179dp"
         android:layout_height="wrap_content"
         android:textColorHint="#CFD8DC"
         android:textColor="#CFD8DC"
@@ -32,10 +32,17 @@
         app:srcCompat="@drawable/hand_sign" />
 
     <ImageView
+        android:id="@+id/speakerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/sound" />
+
+    <ImageView
         android:id="@+id/sendButton"
         android:layout_width="25dp"
         android:layout_height="50dp"
         android:padding="4dp"
         android:src="@android:drawable/ic_menu_send"
         android:layout_weight="0.09" />
+
 </LinearLayout>

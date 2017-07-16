@@ -4,7 +4,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,9 +38,10 @@ import java.util.Map;
 public class ChatActivity extends AppCompatActivity {
 
     LinearLayout layout;
-    ImageView sendButton,mic;
+    ImageView sendButton,mic,speaker;
     EditText messageArea;
     ScrollView scrollView;
+    TextToSpeech tts;
     Firebase reference1, reference2;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,16 @@ public class ChatActivity extends AppCompatActivity {
                 promptSpeechInput();
             }
         });
+            tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int i) {
+                    if (i != TextToSpeech.ERROR)
+                    {
+                        tts.setLanguage(Locale.ENGLISH);
+                    }
+                }
+            });
+            speaker = (ImageView)findViewById(R.id.speakerButton);
         Firebase.setAndroidContext(this);
         reference1 = new Firebase("https://chatassist-2e05e.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
         reference2 = new Firebase("https://chatassist-2e05e.firebaseio.com/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
@@ -78,7 +91,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Map map = dataSnapshot.getValue(Map.class);
-                String message = map.get("message").toString();
+                final String message = map.get("message").toString();
                 String userName = map.get("user").toString();
 
                 if(userName.equals(UserDetails.username)){
@@ -86,6 +99,13 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 else{
                     addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
+                    speaker.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                            tts.speak(message,TextToSpeech.QUEUE_FLUSH,null);
+                        }
+                    });
                 }
             }
 
@@ -109,6 +129,16 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onPause()
+    {
+        if(tts != null)
+        {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onPause();
     }
     public void promptSpeechInput()
     {
@@ -139,7 +169,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public void addMessageBox(String message, int type){
+    public void addMessageBox(final String message, int type){
         //TextView textView = new TextView(ChatActivity.this);
 
         String sampleImageMessage = "";
