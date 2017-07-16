@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.koushikdutta.ion.Ion;
+
 /**
  * TODO: document your custom view class.
  */
@@ -35,7 +38,6 @@ public class CustomChatView extends LinearLayout {
 
         mEditText = (TextView) mainView.findViewById(R.id.editTextCustomView);
         mImage = (ImageView) mainView.findViewById(R.id.imageViewCustomView);
-
         //set the message in the text view
         mEditText.setText(message);
 
@@ -46,6 +48,10 @@ public class CustomChatView extends LinearLayout {
                 //if not null show an image
                 if (imageMessage == "1") {
                     mImage.setImageResource(R.drawable.hello);
+                }
+                if(imageMessage == "2")
+                {
+                    Glide.with(CustomChatView.this).load(R.drawable.how_are_you).into(mImage);
                 }
             } else {
                 //if its null hide it

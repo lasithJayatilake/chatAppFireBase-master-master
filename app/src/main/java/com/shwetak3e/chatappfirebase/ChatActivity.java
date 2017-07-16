@@ -176,7 +176,12 @@ public class ChatActivity extends AppCompatActivity {
         try {
                 if (message.contains("Hi") || message.contains("hi")) {
                     sampleImageMessage = "1";
-                } else {
+                }
+                else if(message.contains("how are you") || message.contains("How are you"))
+                {
+                    sampleImageMessage = "2";
+                }
+                else {
                 sampleImageMessage = null;
             }
         }catch (Exception e)
