@@ -35,6 +35,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.shwetak3e.chatappfirebase.R.id.imageView;
+import static com.shwetak3e.chatappfirebase.R.id.imageViewCustomView;
+
 public class ChatActivity extends AppCompatActivity {
 
     LinearLayout layout;
@@ -130,6 +133,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onPause()
     {
@@ -167,8 +171,8 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 break;
         }
-    }
 
+    }
     public void addMessageBox(final String message, int type){
         //TextView textView = new TextView(ChatActivity.this);
 
