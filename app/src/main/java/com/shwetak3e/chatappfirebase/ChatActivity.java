@@ -178,48 +178,46 @@ public class ChatActivity extends AppCompatActivity {
 
         String sampleImageMessage = "";
         try {
-                if (message.contains("Hi") || message.contains("hi")) {
+                if (message.contains("hi") || message.contains("Hi"))
+                {
                     sampleImageMessage = "1";
                 }
-                else if(message.contains("how are you") || message.contains("How are you"))
+                else if (message.contains("how are you") || message.contains("How are you"))
                 {
                     sampleImageMessage = "2";
                 }
-                else if(message.contains("birthday") || message.contains("Birthday"))
+                else if(message.contains("morning") || message.contains("Morning"))
                 {
                     sampleImageMessage = "3";
                 }
-                else if(message.contains("morning") || message.contains("Morning"))
+                else if(message.contains("afternoon") || message.contains("Afternoon"))
                 {
                     sampleImageMessage = "4";
                 }
-                else if(message.contains("afternoon") || message.contains("Afternoon"))
+                else if(message.contains("evening") || message.contains("Evening"))
                 {
                     sampleImageMessage = "5";
                 }
-                else if(message.contains("evening") || message.contains("Evening"))
+                else if(message.contains("night") || message.contains("Night"))
                 {
                     sampleImageMessage = "6";
                 }
-                else if(message.contains("night") || message.contains("Night"))
+                else if(message.contains("breakfast") || message.contains("Breakfast"))
                 {
                     sampleImageMessage = "7";
                 }
-                else if(message.contains("breakfast") || message.contains("Breakfast"))
+                else if(message.contains("lunch") || message.contains("Lunch"))
                 {
                     sampleImageMessage = "8";
                 }
-                else if(message.contains("lunch") || message.contains("Lunch"))
+                else if (message.contains("dinner") || message.contains("Dineer"))
                 {
                     sampleImageMessage = "9";
                 }
-                else if(message.contains("dinner") || message.contains("Dinner"))
+                else
                 {
-                    sampleImageMessage = "10";
+                    sampleImageMessage = "";
                 }
-                else {
-                sampleImageMessage = null;
-            }
         }catch (Exception e)
         {
             e.getMessage();

@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.koushikdutta.ion.Ion;
+
 
 /**
  * TODO: document your custom view class.
@@ -46,45 +46,20 @@ public class CustomChatView extends LinearLayout {
         try {
             if (imageMessage != null) {
                 //if not null show an image
-                if (imageMessage == "1") {
-                    mImage.setImageResource(R.drawable.hello);
-                }
-                if(imageMessage == "2")
+                switch (imageMessage)
                 {
-                    Glide.with(CustomChatView.this).load(R.drawable.how_are_you).into(mImage);
+                    case "1": mImage.setImageResource(R.drawable.hello);break;
+                    case "2":Glide.with(CustomChatView.this).load(R.drawable.how_are_you).into(mImage);break;
+                    case "3":Glide.with(CustomChatView.this).load(R.drawable.morning).into(mImage);break;
+                    case "4":Glide.with(CustomChatView.this).load(R.drawable.afternoon).into(mImage);break;
+                    case "5":Glide.with(CustomChatView.this).load(R.drawable.evening).into(mImage);break;
+                    case "6":Glide.with(CustomChatView.this).load(R.drawable.night).into(mImage);break;
+                    case "7":Glide.with(CustomChatView.this).load(R.drawable.breakfast).into(mImage);break;
+                    case "8":Glide.with(CustomChatView.this).load(R.drawable.lunch).into(mImage);break;
+                    case "9":Glide.with(CustomChatView.this).load(R.drawable.dinner).into(mImage);break;
+                    default:mImage.setImageResource(R.mipmap.ic_launcher);break;
                 }
-                if(imageMessage == "3")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.birthday).into(mImage);
-                }
-                if(imageMessage == "4")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.morning).into(mImage);
-                }
-                if(imageMessage == "5")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.afternoon).into(mImage);
-                }
-                if(imageMessage == "6")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.evening).into(mImage);
-                }
-                if(imageMessage == "7")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.night).into(mImage);
-                }
-                if (imageMessage == "8")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.breakfast).into(mImage);
-                }
-                if(imageMessage == "9")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.lunch).into(mImage);
-                }
-                if(imageMessage == "10")
-                {
-                    Glide.with(CustomChatView.this).load(R.drawable.dinner).into(mImage);
-                }
+
             } else {
                 //if its null hide it
                 mImage.setVisibility(GONE);
