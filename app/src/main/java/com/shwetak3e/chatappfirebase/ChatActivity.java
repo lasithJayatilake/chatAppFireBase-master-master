@@ -1,57 +1,61 @@
 package com.shwetak3e.chatappfirebase;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.shwetak3e.chatappfirebase.R.id.imageView;
-import static com.shwetak3e.chatappfirebase.R.id.imageViewCustomView;
-
 public class ChatActivity extends AppCompatActivity {
 
     LinearLayout layout;
-    ImageView sendButton,mic,speaker;
+    ImageView sendButton,mic,speaker,hand;
     EditText messageArea;
     ScrollView scrollView;
     TextToSpeech tts;
     Firebase reference1, reference2;
+    Point p;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_chat);;
         layout = (LinearLayout)findViewById(R.id.layout1);
         sendButton = (ImageView)findViewById(R.id.sendButton);
+            hand = (ImageView)findViewById(R.id.signButton);
+            hand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(p != null)
+                    {
+                        showPopup(ChatActivity.this,p);
+                    }
+                }
+            });
+
         mic = (ImageView)findViewById(R.id.micButton);
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
@@ -74,7 +78,6 @@ public class ChatActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         reference1 = new Firebase("https://chatassist-2e05e.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
         reference2 = new Firebase("https://chatassist-2e05e.firebaseio.com/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
-
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +136,40 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        int[] location = new int[2];
+        ImageView imageView = (ImageView) findViewById(R.id.signButton);
+        imageView.getLocationOnScreen(location);
+        p = new Point();
+        p.x = location[0];
+        p.y = location[1];
+    }
+    private void showPopup(final Activity context, Point p)
+    {
+        int popupWidth = 250;
+        int popupHeight = 150;
+        LinearLayout viewGroup = (LinearLayout)context.findViewById(R.id.popup);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.popup_layout,viewGroup);
+        final PopupWindow popup = new PopupWindow(context);
+        popup.setContentView(layout);
+        popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);
+        popup.setFocusable(true);
+        int OFFSET_X = 30;
+        int OFFSET_Y = 30;
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+        Button close = (Button) layout.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.dismiss();
+            }
+        });
 
+    }
     @Override
     public void onPause()
     {
