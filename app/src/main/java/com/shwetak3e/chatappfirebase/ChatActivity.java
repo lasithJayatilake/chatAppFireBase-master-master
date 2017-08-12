@@ -82,14 +82,20 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
-
+                if(messageText.isEmpty())
+                {
+                    Toast.makeText(ChatActivity.this,"Message cannot be empty",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
                 if(!messageText.equals("")){
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.username);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
-                }
+                    messageArea.getText().clear();
+                }}
             }
         });
 
