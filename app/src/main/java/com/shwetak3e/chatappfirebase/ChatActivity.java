@@ -3,12 +3,14 @@ package com.shwetak3e.chatappfirebase;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
     TextToSpeech tts;
     Firebase reference1, reference2;
     Point p;
+    final Context context = this;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +51,10 @@ public class ChatActivity extends AppCompatActivity {
             hand = (ImageView)findViewById(R.id.signButton);
             hand.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if(p != null)
-                    {
-                        showPopup(ChatActivity.this,p);
-                    }
+                public void onClick(View v) {
+                    startActivity(new Intent(ChatActivity.this,PopupLayout.class));
                 }
             });
-
         mic = (ImageView)findViewById(R.id.micButton);
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
@@ -88,14 +87,15 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 else
                 {
-                if(!messageText.equals("")){
+                if(!messageText.equals("")) {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.username);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
                     messageArea.getText().clear();
-                }}
+                }
+                }
             }
         });
 
@@ -150,31 +150,6 @@ public class ChatActivity extends AppCompatActivity {
         p = new Point();
         p.x = location[0];
         p.y = location[1];
-    }
-    private void showPopup(final Activity context, Point p)
-    {
-        int popupWidth = 250;
-        int popupHeight = 150;
-        LinearLayout viewGroup = (LinearLayout)context.findViewById(R.id.popup);
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.popup_layout,viewGroup);
-        final PopupWindow popup = new PopupWindow(context);
-        popup.setContentView(layout);
-        popup.setWidth(popupWidth);
-        popup.setHeight(popupHeight);
-        popup.setFocusable(true);
-        int OFFSET_X = 30;
-        int OFFSET_Y = 30;
-        popup.setBackgroundDrawable(new BitmapDrawable());
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
-        Button close = (Button) layout.findViewById(R.id.close);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popup.dismiss();
-            }
-        });
-
     }
     @Override
     public void onPause()
